@@ -18,7 +18,7 @@ def main():
     drawable = pygame.sprite.Group()
     rocks = pygame.sprite.Group()
     shots = pygame.sprite.Group()
-    
+
     Player.containers = (updatable, drawable)
     Asteroid.containers = (rocks, updatable, drawable)
     AsteroidField.containers = (updatable)
@@ -34,10 +34,16 @@ def main():
                 return
         
         updatable.update(dt) # placed by boot.dev
+        
         for rock in rocks:
             if rock.collision(player):
                 print("Game over!")
                 sys.exit()
+            
+            for shot in shots:
+                if rock.collision(shot):
+                    rock.kill()
+                    shot.kill()
 
         pygame.Surface.fill(screen, (0,0,0)) # written by me
         # screen.fill("black") # from boot.dev solution
