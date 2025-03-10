@@ -17,10 +17,13 @@ def main():
             if event.type == pygame.QUIT:
                 return
         
+        player.update(dt) # placed by boot.dev
+
         pygame.Surface.fill(screen, (0,0,0)) # written by me
         # pygame.Surface.fill(screen, color = "black") # written by me
         # screen.fill("black") # from boot.dev solution
         player.draw(screen)
+        # player.update(dt) # placed by me
         pygame.display.flip()
 
         # limit the framerate to 60 FPS
