@@ -1,6 +1,7 @@
 # this allows us to use code from
 # the open-source pygame library
 # throughout this file
+import sys
 import pygame
 from constants import *
 from player import Player
@@ -29,13 +30,18 @@ def main():
                 return
         
         updatable.update(dt) # placed by boot.dev
+        for rock in rocks:
+            if rock.collision(player):
+                print("Game over!")
+                sys.exit()
 
         pygame.Surface.fill(screen, (0,0,0)) # written by me
-        # pygame.Surface.fill(screen, color = "black") # written by me
         # screen.fill("black") # from boot.dev solution
+        
         for obj in drawable:
             obj.draw(screen)
         # player.update(dt) # placed by me
+        
         pygame.display.flip()
 
         # limit the framerate to 60 FPS
