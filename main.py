@@ -42,7 +42,7 @@ def main():
             
             for shot in shots:
                 if rock.collision(shot):
-                    rock.kill()
+                    rock.split()
                     shot.kill()
 
         pygame.Surface.fill(screen, (0,0,0)) # written by me
