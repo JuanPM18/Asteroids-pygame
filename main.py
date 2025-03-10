@@ -9,6 +9,11 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     fps = pygame.time.Clock()
+
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     dt = 0
 
@@ -17,12 +22,13 @@ def main():
             if event.type == pygame.QUIT:
                 return
         
-        player.update(dt) # placed by boot.dev
+        updatable.update(dt) # placed by boot.dev
 
         pygame.Surface.fill(screen, (0,0,0)) # written by me
         # pygame.Surface.fill(screen, color = "black") # written by me
         # screen.fill("black") # from boot.dev solution
-        player.draw(screen)
+        for obj in drawable:
+            obj.draw(screen)
         # player.update(dt) # placed by me
         pygame.display.flip()
 
